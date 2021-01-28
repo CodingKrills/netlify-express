@@ -6,6 +6,9 @@ const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const router = express.Router();
+const cors = require('cors')
+
+app.use(cors())
 
 // Connection to MongoDB
 mongoose
