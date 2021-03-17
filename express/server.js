@@ -8,12 +8,13 @@ const mongoose = require('mongoose');
 const router = express.Router();
 const cors = require('cors')
 
-app.use(cors())
+app.use(cors());
 
 // Connection to MongoDB
+// /Connection to MongoDB
 mongoose
   .connect(
-    'mongodb+srv://MyUsername:MyPassword@mycluster-rkncu.mongodb.net/ParamafashionDesign?retryWrites=true&w=majority',
+    'mongodb+srv://MyUsername:MyPassword@mycluster-rkncu.mongodb.net/Paramafashion?retryWrites=true&w=majority',
     { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }
   )
   .then(() => console.log('MongoDB Connected'))
@@ -26,7 +27,7 @@ app.use('/.netlify/functions/server', router);  // path must route to lambda
 app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
 
 
-const caroselAndBannerModel = require('./models/AllCaroselAndBanner');
+const caroselAndBannerModel = require('./models/AllCaroselAndBannerDesign');
 
 router.get('/', (req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/html' });
@@ -41,7 +42,7 @@ router.post('/', (req, res) => res.json({ postBody: req.body }));
 
 router.get('/get_banner_and_carosel', async (req, res) => {
 
-  const caroselAndBanner = await caroselAndBannerModel.find({}).sort({ 'position': 1 });
+  const caroselAndBanner = await caroselAndBannerModel.find({});
 
   res.json(caroselAndBanner);
 
